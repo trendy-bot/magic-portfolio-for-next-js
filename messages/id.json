@@ -2,11 +2,6 @@
     "person": {
         "role": "Insinyur Desain"
     },
-    "newsletter": {
-        "title": "Langganan Buletin {firstName}",
-        "description": "Saya sesekali menulis tentang desain, teknologi, dan berbagi pemikiran tentang persimpangan kreativitas dan rekayasa",
-        "button": "Daftar"
-    },
     "home": {
         "label": "Beranda",
         "title": "Portofolio {name}",

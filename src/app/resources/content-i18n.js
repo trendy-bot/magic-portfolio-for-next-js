@@ -243,7 +243,6 @@ const createI18nContent = (t) => {
     return {
         person,
         social,
-        newsletter,
         home,
         about,
         blog,
