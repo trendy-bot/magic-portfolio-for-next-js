@@ -13,11 +13,6 @@ const createI18nContent = (t) => {
         languages: ['English', 'Bahasa']  // optional: Leave the array empty if you don't want to display languages
     }
 
-    const newsletter = {
-        display: true,
-        title: <>{t("newsletter.title", {firstName: person.firstName})}</>,
-        description: <>{t("newsletter.description")}</>
-    }
 
     const social = [
         // Links are automatically displayed.
