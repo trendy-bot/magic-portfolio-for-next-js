@@ -58,10 +58,6 @@ const createI18nContent = (t) => {
         avatar: {
             display: true
         },
-        calendar: {
-            display: true,
-            link: 'https://cal.com'
-        },
         intro: {
             display: true,
             title: t("about.intro.title"),
