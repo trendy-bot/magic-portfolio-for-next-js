@@ -32,6 +32,8 @@ export function Projects({ range, locale }: ProjectsProps) {
                     description={post.metadata.summary}
                     content={post.content}
                     avatars={[{ src: person.avatar }]}
+                 />
+            ))}
         </Flex>
     );
 }
