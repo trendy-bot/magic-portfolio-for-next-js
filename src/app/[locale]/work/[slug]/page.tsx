@@ -8,6 +8,7 @@ import { unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 import { formatDate } from '@/app/utils/formatDate';
 import ScrollToHash from '@/components/ScrollToHash';
+import { person } from '@/app/resources/content';
 
 interface WorkParams {
     params: {
@@ -47,7 +48,6 @@ export function generateMetadata({ params: { slug, locale } }: WorkParams) {
 		summary: description,
 		images,
 		image,
-		team,
 	} = post.metadata
 	let ogImage = image
 		? `https://${baseURL}${image}`
@@ -57,7 +57,6 @@ export function generateMetadata({ params: { slug, locale } }: WorkParams) {
 		title,
 		description,
 		images,
-		team,
 		openGraph: {
 			title,
 			description,
@@ -88,83 +87,50 @@ export default function Project({ params }: WorkParams) {
 	}
 
 	const t = useTranslations();
-	const { person } = renderContent(t);
-
-	const avatars = post.metadata.team?.map((person) => ({
-        src: person.avatar,
-    })) || [];
 
 	return (
-		<Flex as="section"
-			fillWidth maxWidth="m"
-			direction="column" alignItems="center"
-			gap="l">
-			<script
-				type="application/ld+json"
-				suppressHydrationWarning
-				dangerouslySetInnerHTML={{
-					__html: JSON.stringify({
-						'@context': 'https://schema.org',
-						'@type': 'BlogPosting',
-						headline: post.metadata.title,
-						datePublished: post.metadata.publishedAt,
-						dateModified: post.metadata.publishedAt,
-						description: post.metadata.summary,
-						image: post.metadata.image
-							? `https://${baseURL}${post.metadata.image}`
-							: `https://${baseURL}/og?title=${post.metadata.title}`,
-							url: `https://${baseURL}/${params.locale}/work/${post.slug}`,
-						author: {
-							'@type': 'Person',
-							name: person.name,
-						},
-					}),
-				}}
-			/>
-			<Flex
-				fillWidth maxWidth="xs" gap="16"
-				direction="column">
-				<Button
-					href={`/${params.locale}/work`}
-					variant="tertiary"
-					size="s"
-					prefixIcon="chevronLeft">
-					Projects
-				</Button>
-				<Heading
-					variant="display-strong-s">
-					{post.metadata.title}
-				</Heading>
-			</Flex>
-			{post.metadata.images.length > 0 && (
-				<SmartImage
-					aspectRatio="16 / 9"
-					radius="m"
-					alt="image"
-					src={post.metadata.images[0]}/>
-			)}
-			<Flex style={{margin: 'auto'}}
-				as="article"
-				maxWidth="xs" fillWidth
-				direction="column">
-				<Flex
-					gap="12" marginBottom="24"
-					alignItems="center">
-					{ post.metadata.team && (
-						<AvatarGroup
-							reverseOrder
-							avatars={avatars}
-							size="m"/>
-					)}
-					<Text
-						variant="body-default-s"
-						onBackground="neutral-weak">
-						{formatDate(post.metadata.publishedAt)}
-					</Text>
-				</Flex>
-				<CustomMDX source={post.content} />
-			</Flex>
-			<ScrollToHash />
-		</Flex>
+		<Flex as="section" fillWidth maxWidth="m" direction="column" alignItems="center" gap="l">
+            <Flex gap="12" marginBottom="24" alignItems="center">
+                {/* 使用个人头像 */}
+                <Avatar src={person.avatar} size="m" />
+                <Text variant="body-default-s" onBackground="neutral-weak">
+                    {formatDate(post.metadata.publishedAt)}
+                </Text>
+            </Flex>
+            <Flex fillWidth maxWidth="xs" gap="16" direction="column">
+                <Button
+                    href={`/${params.locale}/work`}
+                    variant="tertiary"
+                    size="s"
+                    prefixIcon="chevronLeft">
+                    Projects
+                </Button>
+                <Heading variant="display-strong-s">
+                    {post.metadata.title}
+                </Heading>
+            </Flex>
+            {post.metadata.images.length > 0 && (
+                <SmartImage
+                    aspectRatio="16 / 9"
+                    radius="m"
+                    alt="image"
+                    src={post.metadata.images[0]}
+                />
+            )}
+            <Flex style={{ margin: 'auto' }} as="article" maxWidth="xs" fillWidth direction="column">
+                <Flex gap="12" marginBottom="24" alignItems="center">
+                    {/* 个人信息展示 */}
+                    <Avatar src={person.avatar} size="m" />
+                    <Text variant="body-default-s" onBackground="neutral-weak">
+                        {person.name} - {person.role}
+                    </Text>
+                    <Text variant="body-default-s" onBackground="neutral-weak">
+                        {formatDate(post.metadata.publishedAt)}
+                    </Text>
+                </Flex>
+                <CustomMDX source={post.content} />
+            </Flex>
+            <ScrollToHash />
+        </Flex>
 	)
 }

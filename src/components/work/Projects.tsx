@@ -1,6 +1,6 @@
 import { getPosts } from '@/app/utils/utils';
 import { Flex } from '@/once-ui/components';
-
+import { person } from '@/app/resources/content';
 import { ProjectCard } from '@/components';
 
 interface ProjectsProps {
@@ -31,8 +31,7 @@ export function Projects({ range, locale }: ProjectsProps) {
                     title={post.metadata.title}
                     description={post.metadata.summary}
                     content={post.content}
-                    avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}/>
-            ))}
+                    avatars={[{ src: person.avatar }]}
         </Flex>
     );
 }

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-type Team = {
+type Person = {
     name: string;
     role: string;
     avatar: string;
@@ -16,7 +16,7 @@ type Metadata = {
     image?: string;
     images: string[];
     tag?: string;
-    team: Team[];
+    person: Person[];
 };
 
 function getMDXFiles(dir: string) {
@@ -42,7 +42,7 @@ function readMDXFile(filePath: string) {
         image: data.image || '',
         images: data.images || [],
         tag: data.tag || [],
-        team: data.team || [],
+        person: data.person || [],
     };
 
     return { metadata, content };
