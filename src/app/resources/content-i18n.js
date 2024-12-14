@@ -25,7 +25,7 @@ const createI18nContent = (t) => {
         {
             name: 'LinkedIn',
             icon: 'linkedin',
-            link: 'https://www.linkedin.com/company/once-ui/',
+            link: 'https://www.linkedin.com/in/junjie-zhu-010016265/',
         },
         {
             name: 'X',
