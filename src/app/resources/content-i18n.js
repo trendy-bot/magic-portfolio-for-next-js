@@ -28,14 +28,9 @@ const createI18nContent = (t) => {
             link: 'https://www.linkedin.com/in/junjie-zhu-010016265/',
         },
         {
-            name: 'X',
-            icon: 'x',
-            link: '',
-        },
-        {
             name: 'Email',
             icon: 'email',
-            link: 'mailto:example@gmail.com',
+            link: 'ow346990@gmail.com',
         },
     ]
 
